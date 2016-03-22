@@ -21,4 +21,15 @@ feature 'leagues' do
       expect(page).not_to have_content('You don\'t belong to any leagues')
     end
   end
+  context 'creating leagues' do
+    scenario 'prompts user to fill out a form, then displays the new league' do
+      visit '/leagues'
+      click_link 'Create a league'
+      fill_in 'Name', with: 'Turkcell Super Lig'
+      fill_in 'Number of teams', with: '8'
+      click_button 'Create League'
+      expect(page).to have_content 'Turkcell Super Lig'
+      expect(current_path).to eq '/leagues'
+    end
+  end
 end
