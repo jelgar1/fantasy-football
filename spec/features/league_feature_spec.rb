@@ -9,4 +9,16 @@ feature 'leagues' do
       expect(page).to have_link 'Join a league'
     end
   end
+
+  context 'the user belongs to a league' do
+    before do
+      League.create(name: 'Turkcell Super Lig')
+    end
+
+    scenario 'display leagues' do
+      visit '/leagues'
+      expect(page).to have_content('Turkcell Super Lig')
+      expect(page).not_to have_content('You don\'t belong to any leagues')
+    end
+  end
 end

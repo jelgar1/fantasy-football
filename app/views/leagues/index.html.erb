@@ -1,3 +1,9 @@
-You don't belong to any leagues
+<% if @leagues.any? %>
+  <% @leagues.each do |league| %>
+    <h2> <%= league.name %> </h2>
+  <% end %>
+<% else %>
+  You don't belong to any leagues
+<% end %>
 <a href='#'>Create a league</a>
 <a href='#'>Join a league</a>
