@@ -1,7 +1,9 @@
 class TeamsController < ApplicationController
 
   def index
-    @teams = Team.all
+    @teams = Team.select do |team|
+      team.user_id == current_user.id
+    end
   end
 
   def new
