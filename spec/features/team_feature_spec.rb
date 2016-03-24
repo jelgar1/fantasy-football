@@ -24,9 +24,13 @@ context "user signed in on the homepage" do
       Team.create(name: 'Kings XI')
     end
 
-    scenario 'display teams' do
+    scenario 'display only teams belonging to that user' do
       visit '/teams'
-      expect(page).to have_content('Kings XI')
+      click_link 'Add a team'
+      fill_in 'Name', with: 'Queens XI'
+      click_button 'Create Team'
+      expect(page).to have_content('Queens XI')
+      expect(page).not_to have_content('Kings XI')
       expect(page).not_to have_content('No teams yet')
     end
   end
